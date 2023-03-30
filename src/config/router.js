@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Fichier from "../pages/fichier";
-import Home from "../pages/home";
-import Message from "../pages/message";
+import Accueil from "../components/screens/accueil";
+import Fichier from "../components/screens/fichier";
+import Message from "../components/screens/message";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />
+    element: <Accueil />
   },
   {
     path: "/fichier",

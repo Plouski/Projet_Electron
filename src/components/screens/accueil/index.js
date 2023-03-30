@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../UI/button";
+import ButtonProf from "../../UI/buttonProf";
 import Image from "../../UI/image";
 import ParagrapheComponent from "../../UI/paragraphe";
 import SeparatorComponent from "../../UI/separator";
@@ -30,16 +31,8 @@ const Accueil = () => {
         <TitleComponent 
             title="Il y a des exemples qu'on peut chiffrer qui sont les suivants :" 
             Level="h3" />
-        <ButtonComponent>
-            <button onClick={() => navigate("/fichier")}>
-                Chiffrer un fichier
-            </button>
-        </ButtonComponent>
-        <ButtonComponent>
-            <button onClick={() => navigate("/message")}>
-                Chiffrer un message
-            </button>    
-        </ButtonComponent>
+        <ButtonProf onClick={() => navigate("/fichier")} label="Chiffrer un fichier" />
+        <ButtonProf onClick={() => navigate("/message")} label="Chiffrer un message" />
         <SeparatorComponent />
         <Image image="https://images.frandroid.com/wp-content/uploads/2016/01/cryptage.jpg" />
     </>

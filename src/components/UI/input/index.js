@@ -18,7 +18,7 @@ const InputComponent = ({ type, name, value, isRequired, isDisabled, onChange })
 }
 
 const InputStyled = styled.div`
-color: red;
+  padding: 15px;
 `;
 
 export default InputComponent;

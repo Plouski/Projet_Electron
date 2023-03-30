@@ -2,18 +2,21 @@ import React, {useState} from 'react';
 import CryptoJS from "crypto-js";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import SeparatorComponent from '../../UI/separator';
 import TitleComponent from '../../UI/title';
 import ParagrapheComponent from '../../UI/paragraphe';
+import SeparatorComponent from '../../UI/separator';
 import ButtonComponent from '../../UI/button';
 import LabelComponent from '../../UI/label';
+import ButtonProf from '../../UI/buttonProf';
 
-function MessageComponent () {
+
+function Message () {
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const [screen, setScreen] = useState("encrypt");
   const [encrptedData, setEncrptedData] = useState("");
   const [decrptedData, setDecrptedData] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   //Clé secrete
   const secretPass = "XkhZG4fW2t2W";
@@ -48,11 +51,8 @@ function MessageComponent () {
     if (!text) 
     {
       alert('Erreur ! :( Remplissez bien votre message.')
-      // return true;
     }
-    // else {
-    //   return false;
-    // }
+
     if (screen === "encrypt") encryptData();
     else decryptData();
   };
@@ -68,14 +68,14 @@ function MessageComponent () {
         Le texte, devenu illisible, ne peut alors être déchiffré (décrypté) qu'avec une clé secrète.
       </ParagrapheComponent>
       <SeparatorComponent/>
-      <button 
-        onClick={() => {switchScreen("encrypt");}}>
-        Cryptage
-      </button>
-      <button 
-        onClick={() => {switchScreen("decrypt");}}>
-        Decryptage
-      </button>
+      <ButtonProf 
+        onClick={() => {switchScreen("encrypt");}}
+        label="Cryptage" 
+      />
+      <ButtonProf 
+        onClick={() => {switchScreen("decrypt");}}
+        label="Decryptage" 
+      />
       <SeparatorComponent />
       <textarea
         rows="4"
@@ -89,31 +89,24 @@ function MessageComponent () {
       />
       <SeparatorComponent />
       <ButtonComponent>
-      <button onClick={handleClick}>
-        {screen === "encrypt" ? "Crypter" : "Decrypter"}
-      </button>
+        <button onClick={handleClick}>
+          {screen === "encrypt" ? "Crypter" : "Decrypter"}
+        </button>
       </ButtonComponent>
       {encrptedData || decrptedData ? (
       <>
         <LabelComponent>
           {screen === "encrypt" ? "Crypter" : "Decrypter"} Message:
         </LabelComponent>
-        <ParagrapheComponent>
+        <ParagrapheComponent id="sample" value={inputValue}>
           {screen === "encrypt" ? encrptedData : decrptedData}
         </ParagrapheComponent>
       </>
       ) : null}
+      <SeparatorComponent />
       <BottomRight>
-        <ButtonComponent>
-          <button onClick={() => navigate("/")}>
-            Retour à l'accueil
-          </button>    
-        </ButtonComponent> 
-        <ButtonComponent>
-          <button onClick={() => navigate("/fichier")}>
-            Chiffrer un fichier
-          </button>    
-        </ButtonComponent> 
+        <ButtonProf onClick={() => navigate("/fichier")} label="Chiffrer un fichier" />
+        <ButtonProf onClick={() => navigate("/")} label="Retour à l'accueil" />
       </BottomRight>
       </>
   );  
@@ -124,4 +117,4 @@ const BottomRight = styled.div`
   right:1%;
 `;
 
-export default MessageComponent;
+export default Message;

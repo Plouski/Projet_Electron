@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import CryptoJS from "crypto-js";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import DialogButton from '../../dialogButton';
 import TitleComponent from '../../UI/title';
 import ParagrapheComponent from '../../UI/paragraphe';
-import ButtonComponent from '../../UI/button';
 import SeparatorComponent from '../../UI/separator';
+import ButtonComponent from '../../UI/button';
+import ButtonProf from '../../UI/buttonProf';
 import LabelComponent from '../../UI/label';
+import InputComponent from '../../UI/input';
+import DialogButton from '../../UI/dialogButton';
 
-function FichierComponent () {
+function Fichier () {
   const navigate = useNavigate();
   const [filePath, setFilePath] = useState("");
   const [screen, setScreen] = useState("encrypt");
@@ -71,18 +73,20 @@ function FichierComponent () {
         Seule une personne possédant la bonne clé de chiffrement (comme un mot de passe) peut déchiffrer et lire les données.
       </ParagrapheComponent>
       <SeparatorComponent />
-      <button 
-        onClick={() => {switchScreen("encrypt");}}>
-        Cryptage
-      </button>
-      <button 
-        onClick={() => {switchScreen("decrypt");}}>
-        Decryptage
-      </button>
+      <ButtonProf 
+        onClick={() => {switchScreen("encrypt");}}
+        label="Cryptage" 
+      />
+      <ButtonProf 
+        onClick={() => {switchScreen("decrypt");}}
+        label="Decryptage" 
+      />
       <SeparatorComponent />
-      <DialogButton onClick={openDialog} />
-      <SeparatorComponent />
-      <input
+      <DialogButton 
+        onClick={openDialog} 
+        label="Ouvrir un fichier" 
+      />
+      <InputComponent
         name="filePath"
         value={filePath}
         required="required"
@@ -91,7 +95,6 @@ function FichierComponent () {
           setFilePath(target.value);
         }}
       />
-      <SeparatorComponent />
       <ButtonComponent>
         <button onClick={handleClick}>
           {screen === "encrypt" ? "Crypter" : "Decrypter"}
@@ -109,16 +112,8 @@ function FichierComponent () {
     ) : null}
       <SeparatorComponent />
       <BottomRight>
-        <ButtonComponent>
-          <button onClick={() => navigate("/")}>
-            Retour à l'accueil
-          </button>    
-        </ButtonComponent> 
-        <ButtonComponent>
-          <button onClick={() => navigate("/message")}>
-            Chiffrer un message
-          </button>    
-        </ButtonComponent> 
+        <ButtonProf onClick={() => navigate("/message")} label="Chiffrer un message" />
+        <ButtonProf onClick={() => navigate("/")} label="Retour à l'accueil" />
       </BottomRight>
     </>
   );
@@ -129,4 +124,4 @@ const BottomRight = styled.div`
   right:1%;
 `;
 
-export default FichierComponent;
+export default Fichier;

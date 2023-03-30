@@ -17,10 +17,13 @@ function createWindow() {
     },
   });
 
+  //Ouverture du fichier
   ipcMain.on('open-file-dialog', event => {
     dialog
       .showOpenDialog(mainWindow, {
+        title: 'Selectionnez le fichier du processus principal',
         properties: ['openFile'],
+        buttonLabel: "Choisir ce fichier",
         // filters: [
         //   { name: 'Sound', extensions: ['mp3'] }]
         filters: [
@@ -38,6 +41,7 @@ function createWindow() {
         dialog.showErrorBox('Error', 'Something went wrong')
       })
   })
+
   // In production, set the initial browser path to the local bundle generated
   // by the Create React App build process.
   // In development, set it to localhost to allow live/hot-reloading.
